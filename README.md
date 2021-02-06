@@ -15,13 +15,12 @@ Clone this repository
 ### `run npm install`
 
 Database setup:
-  access mysql server and in the terminal run ### `create database restaurants_db;` 
-  go to server/data and run ### `tables.sql` to create restaurant table & ### `node migration.js` to migrate data from CSV file
+  access mysql server and in the terminal run `create database restaurants_db;` 
+  go to server/data and run ### `tables.sql` to create restaurant table & `node migration.js` to migrate data from CSV file
 
 In the project directory:
-
-### `npm start`
-### `node server`
+ `npm start`
+ `node server`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -35,7 +34,7 @@ Frontend: React, MobX, Material-ui
 Backend: NodeJS, Express, Sequelize, Axios
 Database: MySQL
 
-### `yarn test`
+ `yarn test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
