@@ -17,7 +17,7 @@ export class RestaurantStore {
     getRestaurants = async () => {
         try {
             this.restaurants = []
-            let restaurants = await axios.get('http://localhost:4200/restaurants')
+            let restaurants = await axios.get('/restaurants')
             runInAction(() => {
                 restaurants.data.map(restaurant =>
                     this.restaurants.push(restaurant)
@@ -30,7 +30,7 @@ export class RestaurantStore {
 
     async updateRestaurant(id, name, type, phone, location) {
         try {
-            await axios.put("http://localhost:4200/restaurant", { id, name, type, phone, location })
+            await axios.put("/restaurant", { id, name, type, phone, location })
             runInAction(() => {
                 const i = this.restaurants.findIndex(r => r.id === id)
                 this.restaurants[i] = { id, name, type, phone, location }
@@ -42,7 +42,7 @@ export class RestaurantStore {
 
     async deleteRestaurant(id) {
         try {
-            await axios.delete(`http://localhost:4200/restaurant/${id}`)
+            await axios.delete(`/restaurant/${id}`)
             runInAction(() => {
                 const i = this.restaurants.findIndex(r => r.id === id)
                 this.restaurants.splice(i, 1)
@@ -55,7 +55,7 @@ export class RestaurantStore {
     async addRestaurant(name, type, phone, location) {
         try {
             const id = Date.now().toString(36) + Math.random().toString(36).substr(2, 5)
-            await axios.post("http://localhost:4200/restaurant", { name, type, phone, location })
+            await axios.post("/restaurant", { name, type, phone, location })
             runInAction(() => {
                 this.restaurants.push({ id, name, type, phone, location })
             })

@@ -2,6 +2,7 @@
   "name": "fullstacktest",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4200",
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
@@ -28,7 +29,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

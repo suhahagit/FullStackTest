@@ -1,32 +1,32 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const Sequelize = require('sequelize')
 const apiKey = require('./credentials')
-const axios = require('axios');
+const axios = require('axios')
 
-const sequelize = new Sequelize('mysql://root:@localhost/restaurants_db')
+const sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL || 'mysql://root:@localhost/restaurants_db')
 
 router.get('/sanity', function (req, res) {
-    res.sendStatus(200);
+    res.sendStatus(200)
 });
 
 sequelize
     .authenticate()
     .then(() => {
-        console.log('Connection has been established successfully.');
+        console.log('Connection has been established successfully.')
     })
     .catch(err => {
-        console.error('Unable to connect to the database:', err);
+        console.error('Unable to connect to the database:', err)
     })
 
 router.get('/restaurants', async function (req, res) {
     try {
-        let restaurants = await sequelize.query(`SELECT * FROM restaurants`);
+        let restaurants = await sequelize.query(`SELECT * FROM restaurants`)
         const restaurantsObj = []
         for (let r of restaurants[0]) {
             if ((r.location.split("/")).length === 2) {
                 const locationArr = r.location.split("/")
-                const address = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationArr[0]},${locationArr[1]}&key=${apiKey}`);
+                const address = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationArr[0]},${locationArr[1]}&key=${apiKey}`)
                 r.location = address.data.results[1].formatted_address
             }
             restaurantsObj.push({ id: r.id, name: r.name, type: r.type, phone: r.phone, location: r.location })
@@ -34,7 +34,7 @@ router.get('/restaurants', async function (req, res) {
         res.send(restaurantsObj)
     }
     catch (error) {
-        res.send(error);
+        res.send(error)
     }
 });
 
@@ -51,7 +51,7 @@ router.put('/restaurant', async (req, res) => {
         const restaurant = await sequelize.query(query)
         res.send(restaurant)
     } catch (error) {
-        res.send(error);
+        res.send(error)
     }
 })
 
@@ -59,9 +59,9 @@ router.delete('/restaurant/:id', async function (req, res) {
     try {
         const query = `DELETE FROM restaurants WHERE id = "${req.params.id}" ;`
         const restaurant = await sequelize.query(query)
-        res.send(restaurant);
+        res.send(restaurant)
     } catch (error) {
-        res.send(error);
+        res.send(error)
     }
 });
 
@@ -73,8 +73,8 @@ router.post('/restaurant', async (req, res) => {
         const restaurant = await sequelize.query(query)
         res.send(restaurant)
     } catch (error) {
-        res.send(error);
+        res.send(error)
     }
 })
 
-module.exports = router;
+module.exports = router

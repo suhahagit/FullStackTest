@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { observer, inject } from 'mobx-react'
 import { useState } from 'react'
 import Table from "@material-ui/core/Table"
@@ -12,11 +12,10 @@ import EditRoundedIcon from '@material-ui/icons/EditRounded'
 import AddIcon from '@material-ui/icons/Add'
 import { TextField } from '@material-ui/core'
 import UpdateRestaurant from './UpdateRestaurant'
-import ClipLoader from "react-spinners/ClipLoader";
 
 const RestaurantsTable = (props) => {
 
-    const { restaurants, loader } = props.restaurants
+    const { restaurants } = props.restaurants
     const [inputValue, setInputValue] = useState('')
     const [currRestaurant, setCurrRestaurant] = useState({ id: '', name: '', type: '', phone: '', location: '' })
     const [open, setOpen] = useState(false)
@@ -53,42 +52,40 @@ const RestaurantsTable = (props) => {
     }
 
     return (
-        loader ? <ClipLoader color={'#425D7C'} loading={loader} size={150} />
-            :
-            <div>
-                <TextField id="searchBar" label="Search Restaurant"
-                    onChange={({ target }) => setInputValue(target.value)}
-                    value={inputValue} />
-                <AddIcon onClick={handleAdd} />
-                <br /><br />
-                <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Phone</TableCell>
-                                <TableCell>Location</TableCell>
-                                <TableCell />
-                                <TableCell />
+        <div>
+            <TextField id="searchBar" label="Search Restaurant"
+                onChange={({ target }) => setInputValue(target.value)}
+                value={inputValue} />
+            <AddIcon onClick={handleAdd} />
+            <br /><br />
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Type</TableCell>
+                            <TableCell>Phone</TableCell>
+                            <TableCell>Location</TableCell>
+                            <TableCell />
+                            <TableCell />
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {restaurantsArr.map(r => (
+                            <TableRow key={(Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()}>
+                                <TableCell>{r.name}</TableCell>
+                                <TableCell>{r.type}</TableCell>
+                                <TableCell>{r.phone}</TableCell>
+                                <TableCell>{r.location}</TableCell>
+                                <TableCell><EditRoundedIcon onClick={() => handleEdit(r)} /></TableCell>
+                                <TableCell><DeleteOutlineRoundedIcon onClick={() => handleRemove(r)} /></TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {restaurantsArr.map(r => (
-                                <TableRow key={(Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()}>
-                                    <TableCell>{r.name}</TableCell>
-                                    <TableCell>{r.type}</TableCell>
-                                    <TableCell>{r.phone}</TableCell>
-                                    <TableCell>{r.location}</TableCell>
-                                    <TableCell><EditRoundedIcon onClick={() => handleEdit(r)} /></TableCell>
-                                    <TableCell><DeleteOutlineRoundedIcon onClick={() => handleRemove(r)} /></TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Paper>
-                {open && <UpdateRestaurant restaurantInfo={currRestaurant} setOpen={setOpen} type={type} />}
-            </div>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+            {open && <UpdateRestaurant restaurantInfo={currRestaurant} setOpen={setOpen} type={type} />}
+        </div>
     );
 };
 
