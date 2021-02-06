@@ -12,7 +12,7 @@ Clone this repository
 
 (make sure you have Node, NPM and MySQL installed globally on your machine)
 
-### `run npm install`
+`run npm install`
 
 Database setup:
   access mysql server and in the terminal run `create database restaurants_db;` 
