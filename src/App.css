@@ -9,6 +9,10 @@
   display: grid;
 }
 
+.upload {
+  padding-bottom: 2vh;
+}
+
 #searchBar {
   padding: 12px;
 }

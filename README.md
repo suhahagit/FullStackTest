@@ -2,9 +2,17 @@
 
 A web page that loads a list of restaurants from a CSV file and displays the data in a searchable table.
 
-The user can see the list of restaurants, search for restaurants based on restaurant name, delete/edit/add a restaurant
+The user can: 
+  upload a CSV file 
+  see the list of restaurants from that file 
+  search for restaurants based on restaurant name 
+  delete/edit/add a restaurant
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Demo
+
+https://fst-ds.herokuapp.com
 
 ## Available Scripts
 
@@ -16,7 +24,7 @@ Clone this repository
 
 Database setup:
   access mysql server and in the terminal run `create database restaurants_db;` 
-  go to server/data and run `tables.sql` to create restaurant table & `node migration.js` to migrate data from CSV file
+  go to server/data and run `tables.sql` to create restaurant table
 
 In the project directory:
  `npm start`

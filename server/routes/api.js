@@ -3,6 +3,8 @@ const router = express.Router()
 const Sequelize = require('sequelize')
 const apiKey = require('./credentials')
 const axios = require('axios')
+const path = require('path')
+const migrateData = require('../data/migration')
 
 const sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL || 'mysql://root:@localhost/restaurants_db')
 
@@ -73,6 +75,26 @@ router.post('/restaurant', async (req, res) => {
         const restaurant = await sequelize.query(query)
         res.send(restaurant)
     } catch (error) {
+        res.send(error)
+    }
+})
+
+router.post('/upload', async (req, res) => {
+    try {
+        if (!req.files) {
+            res.send(error)
+        }
+        const myFile = req.files.myFile;
+        const filePath = path.join(__dirname, '..', 'data', `${myFile.name}`)
+        myFile.mv(filePath, function (err) {
+            if (err) {
+                res.send(error)
+            }
+            migrateData(filePath)
+            return res.send({ name: myFile.name, path: `/${myFile.name}` })
+        });
+    } catch (error) {
+        console.log(error)
         res.send(error)
     }
 })
