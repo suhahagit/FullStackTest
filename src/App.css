@@ -1,5 +1,16 @@
 .App {
-  text-align: center;
+  margin: 25px;
+}
+
+.update {
+  height: 30vh;
+  width: 30vw;
+  padding: 2vh;
+  display: grid;
+}
+
+#searchBar {
+  padding: 12px;
 }
 
 .App-logo {

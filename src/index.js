@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'mobx-react'
+import { RestaurantStore } from './stores/RestaurantStore'
+
+const restaurants = new RestaurantStore()
+const stores = { restaurants }
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider {...stores}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
