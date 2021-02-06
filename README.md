@@ -16,7 +16,7 @@ Clone this repository
 
 Database setup:
   access mysql server and in the terminal run `create database restaurants_db;` 
-  go to server/data and run ### `tables.sql` to create restaurant table & `node migration.js` to migrate data from CSV file
+  go to server/data and run `tables.sql` to create restaurant table & `node migration.js` to migrate data from CSV file
 
 In the project directory:
  `npm start`
